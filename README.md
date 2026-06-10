@@ -19,13 +19,14 @@ A aplicação foi desenhada focando em simplicidade, mas com uma arquitetura bas
 ### Passo a Passo
 1. Clone este repositório:
 ```bash
-   git clone https://github.com/thalesms2/pipefy_py.git
-   cd pipefy_py 
+git clone https://github.com/thalesms2/pipefy_py.git
+cd pipefy_py 
 ```
 2. Copie o arquivo `.env.example` e renomeie para `.env`.
 
-3. Execute a aplicação e o banco de dados:
+1. Execute a aplicação e o banco de dados:
 ```bash
+docker-compose build
 docker-compose up 
 ```
  
@@ -37,8 +38,8 @@ Fiz questão de cobrir os fluxos principais com testes automatizados, validando 
 Para rodar a suíte de testes:
 
 ```bash
-pytest tests/test_clientes.py -v
-pytest tests/test_webhook.py -v
+docker compose --profile test run --rm test pytest tests/test_clientes.py -v
+docker compose --profile test run --rm test pytest tests/test_webhook.py -v
 ```
 
 ## Exemplos de Requisição (cURL)

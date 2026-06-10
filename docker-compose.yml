@@ -15,6 +15,20 @@ services:
     volumes:
       - .:/app
 
+  test:
+    build: .
+    environment:
+      DATABASE_URL: postgresql+asyncpg://mundo:mundo@db:5432/mundoinvest
+      TEST_DATABASE_URL: postgresql+asyncpg://mundo:mundo@db_test:5432/mundoinvest_test
+    command: ["pytest", "tests/", "-v"]
+    depends_on:
+      db_test:
+        condition: service_healthy
+    volumes:
+      - .:/app
+    profiles:
+      - test
+
   db:
     image: postgres:15-alpine
     environment:
